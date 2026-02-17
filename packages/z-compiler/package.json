@@ -1,5 +1,6 @@
 {
-  "name": "@zentry-common/z-compiler",
+  "name": "@zentry/z-compiler",
+  "author": "Zentry",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
