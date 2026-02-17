@@ -1,0 +1,21 @@
+{
+  "name": "@zentry-common/z-compiler",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "test": "vitest --passWithNoTests"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "typescript": "latest",
+    "vitest": "^1.0.0"
+  }
+}
