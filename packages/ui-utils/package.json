@@ -44,7 +44,6 @@
     "@types/react-dom": "19.2.3"
   },
   "dependencies": {
-    "@zentryhq/utils": "workspace:*",
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.4.1"
   }

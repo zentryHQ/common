@@ -1,11 +1,12 @@
-import { Resolvable } from "@zentryhq/utils/resolvable";
-
 /**
  * Debounces a fetchable function into a single call.
  */
 export class DebounceFetcher<ARGS, RES> {
   private _aggregated: Array<{
-    resolvable: Resolvable<RES | null>;
+    resolvable: {
+      promise: Promise<RES | null>;
+      resolve(r: RES): void;
+    };
     args: ARGS;
   }> = [];
   private _rafId: number | null = null;
@@ -15,8 +16,17 @@ export class DebounceFetcher<ARGS, RES> {
   ) {}
 
   public fetch(args: ARGS): Promise<RES | null> {
-    const resolvable = new Resolvable<RES | null>();
-    this._aggregated.push({ resolvable, args });
+    let resolve: (r: RES) => void = () => {};
+    const promise = new Promise<RES | null>((r) => {
+      resolve = r;
+    });
+    this._aggregated.push({
+      resolvable: {
+        promise,
+        resolve,
+      },
+      args,
+    });
 
     if (!this._rafId) {
       this._rafId = requestAnimationFrame(() => {
@@ -37,6 +47,6 @@ export class DebounceFetcher<ARGS, RES> {
       });
     }
 
-    return resolvable.wait();
+    return promise;
   }
 }

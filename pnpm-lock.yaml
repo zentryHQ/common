@@ -20,9 +20,6 @@ importers:
 
   packages/ui-utils:
     dependencies:
-      '@zentryhq/utils':
-        specifier: workspace:*
-        version: link:../utils
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
