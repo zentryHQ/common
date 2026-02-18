@@ -1,0 +1,51 @@
+{
+  "name": "@zentryhq/ui-utils",
+  "version": "1.0.0",
+  "description": "UI Utility module used by the team at Zentry",
+  "homepage": "https://github.com/zentryHQ/common",
+  "bugs": {
+    "url": "https://github.com/zentryHQ/common"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zentryHQ/common"
+  },
+  "license": "MIT",
+  "author": "Zentry",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "exports": {
+    "./cn": {
+      "types": "./dist/cn.d.ts",
+      "default": "./dist/cn.js"
+    },
+    "./merge-refs": {
+      "types": "./dist/merge-refs.d.ts",
+      "default": "./dist/merge-refs.js"
+    },
+    "./debounced-fetcher": {
+      "types": "./dist/debounced-fetcher.d.ts",
+      "default": "./dist/debounced-fetcher.js"
+    }
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "test": "vitest --passWithNoTests"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "typescript": "latest",
+    "vitest": "^1.0.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
+  },
+  "dependencies": {
+    "@zentryhq/utils": "workspace:*",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.1"
+  }
+}

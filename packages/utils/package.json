@@ -1,7 +1,7 @@
 {
-  "name": "@zentryhq/z-compiler",
-  "version": "1.0.6",
-  "description": "DSL markup text transformer for inline-widget rendering",
+  "name": "@zentryhq/utils",
+  "version": "1.0.0",
+  "description": "Utility module used by the team at Zentry",
   "homepage": "https://github.com/zentryHQ/common",
   "bugs": {
     "url": "https://github.com/zentryHQ/common"
@@ -17,8 +17,16 @@
     "LICENSE",
     "README.md"
   ],
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "exports": {
+    "./get-twitter-image-variant": {
+      "types": "./dist/get-twitter-image-variant.d.ts",
+      "default": "./dist/get-twitter-image-variant.js"
+    },
+    "./resolvable": {
+      "types": "./dist/resolvable.d.ts",
+      "default": "./dist/resolvable.js"
+    }
+  },
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
