@@ -12,12 +12,6 @@
   },
   "license": "MIT",
   "author": "Zentry",
-  "exports": {
-    ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
-    }
-  },
   "files": [
     "dist",
     "LICENSE",
