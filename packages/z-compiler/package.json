@@ -1,6 +1,6 @@
 {
   "name": "@zentryhq/z-compiler",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "DSL markup text transformer for inline-widget rendering",
   "homepage": "https://github.com/zentryHQ/common",
   "bugs": {
