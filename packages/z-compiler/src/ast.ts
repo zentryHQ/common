@@ -114,8 +114,31 @@ export type InlineWidgetProps = InlineWidgetVariants & {
   leftOver?: string;
 };
 
+// 1. Helper to safely grab the value
+type GetWidgetValue<TName, TVariants> = TVariants extends {
+  name: infer N;
+  value: infer V;
+}
+  ? TName extends N
+    ? V
+    : never
+  : never;
+
+// 2. The corrected output type
+// Tyep is a little convoluted due to legacy reasons...
+export type InlineWidgetNodeOutput<
+  T extends InlineWidgetVariants["name"] = InlineWidgetVariants["name"],
+> = T extends any
+  ? {
+      name: T;
+      props: {
+        value: GetWidgetValue<T, InlineWidgetVariants>;
+      };
+    }
+  : never;
+
 export class InlineWidgetNode extends TerminalNode<InlineWidgetProps> {
-  public override print(): string {
+  public override print() {
     const { name, value, leftOver } = this.value;
     const pString =
       typeof value === "string" ? `"${value}"` : JSON.stringify(value);
