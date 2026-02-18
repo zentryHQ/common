@@ -1,6 +1,6 @@
 {
   "name": "@zentryhq/ui-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "UI Utility module used by the team at Zentry",
   "homepage": "https://github.com/zentryHQ/common",
   "bugs": {
