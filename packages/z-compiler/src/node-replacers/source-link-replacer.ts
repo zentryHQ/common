@@ -1,10 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { InlineWidgetNode, MarkdownLinkNode, Node, PlainTextNode } from '../ast';
-import { NodeReplacer } from './type';
+import {
+  InlineWidgetNode,
+  MarkdownLinkNode,
+  Node,
+  PlainTextNode,
+} from "../ast";
+import { NodeReplacer } from "./type";
 
 export class SourceLinkNodeReplacer extends NodeReplacer {
   private _linkToTitle?: (link: string) => string | undefined;
-  public constructor(config?: { linkToTitle?: (link: string) => string | undefined }) {
+  public constructor(config?: {
+    linkToTitle?: (link: string) => string | undefined;
+  }) {
     super();
     this._linkToTitle = config?.linkToTitle;
   }
@@ -25,7 +32,10 @@ export class SourceLinkNodeReplacer extends NodeReplacer {
         continue;
       }
 
-      if (node instanceof PlainTextNode && (node.value === ',' || node.value === ' ')) {
+      if (
+        node instanceof PlainTextNode &&
+        (node.value === "," || node.value === " ")
+      ) {
         linkNodeChain.push(node);
         continue;
       }
@@ -33,7 +43,9 @@ export class SourceLinkNodeReplacer extends NodeReplacer {
       break;
     }
 
-    const onlyLinks = linkNodeChain.filter((l) => l instanceof MarkdownLinkNode);
+    const onlyLinks = linkNodeChain.filter(
+      (l) => l instanceof MarkdownLinkNode,
+    );
     if (onlyLinks.length === 0) {
       return;
     }
@@ -47,16 +59,19 @@ export class SourceLinkNodeReplacer extends NodeReplacer {
       return -1;
     })();
 
+    const mapped = onlyLinks.map((l) => {
+      const title =
+        this._linkToTitle?.(l.value.link) ??
+        this._resolveHostName(l.value.link);
+      return {
+        title,
+        url: l.value.link,
+      };
+    });
     return [
       new InlineWidgetNode({
-        name: 'sourceLink',
-        value: onlyLinks.map((l) => {
-          const title = this._linkToTitle?.(l.value.link) ?? this._resolveHostName(l.value.link);
-          return {
-            title,
-            url: l.value.link,
-          };
-        }),
+        name: "sourceLink",
+        value: mapped,
       }),
       lastLinkIndex,
     ];
@@ -66,14 +81,15 @@ export class SourceLinkNodeReplacer extends NodeReplacer {
     try {
       return new URL(link).hostname;
     } catch {
-      return '';
+      return "";
     }
   }
 
   private _isValidSourceLink(node: Node) {
     const valid =
       node instanceof MarkdownLinkNode &&
-      (node.value.text.toLowerCase() === 'source' || !node.value.link.startsWith('https://'));
+      (node.value.text.toLowerCase() === "source" ||
+        !node.value.link.startsWith("https://"));
     return valid;
   }
 }
